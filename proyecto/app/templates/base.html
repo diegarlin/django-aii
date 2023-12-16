@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema recomendación{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    
+</head>
+<body>
+    <h1>EJERCICIO DE RS COLABORATIVOS - MOVIELENS 100K</h1>
+    <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="/">Inicio</a>
+            <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="/cargar">Poblar Base de Datos - Acceso Restringido</a></li>
+                        <li><a href="/loadRS">Cargar el Sistema de Recomendaci&oacute;n</a></li>						
+                    </ul>
+                </div>
+            </li>
+           <li><a href="#">B&uacute;squedas</a>
+                <div class="uk-navbar-dropdown">
+                    <!-- <ul class="uk-nav uk-navbar-dropdown-nav">
+						<li><a href="/recomendar_peliculas_usuarios">Recomendar Pel&iacute;culas a un usuario</a></li>
+						<li><a href="/peliculas_similares">Mostrar Pel&iacute;culas similares a una</a></li>
+						<li><a href="/peliculas_usuario">Buscar por Usuario</a></li>
+                        <li><a href="/peliculas_no_puntuadas">Recomendar 3 peliculas no puntuadas</a></li>
+                    </ul> -->
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            {% for message in messages %}
+                var iconType = '{% if message.tags == "success" %}success{% elif message.tags == "info" %}info{% elif message.tags == "warning" %}warning{% elif message.tags == "error" %}error{% else %}info{% endif %}';
+                var timerDuration = {{ message.extra_tags.timer_duration|default:2000 }}; 
+                // Muestra la alerta por cada mensaje
+                Swal.fire({
+                    icon: iconType,
+                    text: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: timerDuration 
+                });
+            {% endfor %}
+        });
+    </script>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+       
+    </main>
+
+   
+</body>
+</html>

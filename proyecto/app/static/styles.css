@@ -1,0 +1,267 @@
+/* styles.css 
+
+#222831 rgb(34, 40, 49)
+#393E46 rgb(57, 62, 70)
+#00ADB5 rgb(0, 173, 181)
+#EEEEEE rgb(238, 238, 238)
+
+*/
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Al menos el 100% de la altura del viewport */
+}
+
+header {
+    
+    position: fixed;
+    background-color: #222831;
+    color: #EEEEEE;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222831;
+    color: #EEEEEE;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.company-name {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    padding-right: 3vh;
+}
+
+.username {
+    margin-right: 10px; /* Ajusta el margen entre el nombre de usuario y los botones */
+}
+
+.login-button,
+.register-button,
+.logout-button {
+    border: none;
+    cursor: pointer;
+    padding: 10px 25px;
+    margin-right: 2vh;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.login-button {
+    background-color: #00ADB5;
+    color: #EEEEEE;
+    margin-right: 10px;
+}
+
+
+
+.register-button {
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+.logout-button {
+    background-color: #00ADB5;
+    color: #EEEEEE;
+}
+
+footer {
+    background-color: #222831;
+    color: #EEEEEE;
+    padding: 15px 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.info-section,
+.social-media-section {
+    flex: 1;
+    margin: 10px;
+    text-align: left;
+}
+
+h3 {
+    color: #00ADB5;
+}
+
+p {
+    margin: 5px 0;
+}
+
+a {
+    color: #EEEEEE;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+}
+
+a:hover {
+    color: #00ADB5;
+}
+
+.copyright {
+    margin-top: 20px;
+}
+
+main {
+    flex: 1; /* Ocupa el espacio restante */
+    background-color: rgb(210, 228, 245); /* Fondo para el contenido principal */
+    padding-top: 7.5vh;
+    padding-bottom: 2vh;
+}
+
+h2 {
+    color: #222831;
+}
+
+form {
+    background-color: #393E46;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #EEEEEE;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #00ADB5;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #00ADB5;
+    color: #EEEEEE;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #222831;
+}
+
+.login-button:hover{
+    background-color: #393E46;
+}
+h2.mb-4{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #393E46;
+    font-weight: bold;
+    text-align: center;
+}
+
+.invalid-feedback {
+    color: #dc3545; /* Color rojo que utiliza Bootstrap por defecto */
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+
+.error-message {
+    display: block;
+    margin-top: 5px;
+    color: #dc3545;
+    font-size: 0.9rem;
+  }
+
+ul.errorlist.nonfield {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #dc3545; /* Color rojo similar al de Bootstrap */
+    font-size: 0.9rem;
+  }
+
+ul.errorlist.nonfield li {
+    margin-bottom: 5px;
+  }
+
+  .container.my-5 {
+    margin-top: 5rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+#img {
+    padding-left: 12dvw;
+}
+
+.form.prod {
+    display: flex;
+    align-items: center;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-secondary,
+.btn-success {
+    width: 35px;
+    background-color: #00ADB5;
+}
+
+.col-lg-6 {
+    margin: 0px;
+}
+
+#thumbnail-detalles {
+    width: 100%;
+}
