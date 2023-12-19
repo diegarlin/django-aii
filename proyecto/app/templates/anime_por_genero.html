@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Seleccione un género</h1>
+    <form method="post">
+        {% csrf_token %}
+        <select name="genero">
+            {% for genero in generos %}
+                <option value="{{ genero }}">{{ genero }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Mostrar animes">
+    </form>
+
+    {% if selected_genre %}
+        <h2>Animes del género {{ selected_genre }}</h2>
+        <table>
+            <tr>
+                <th>Título</th>
+                <th>Género</th>
+                <th>Formato de emisión</th>
+                <th>Número de episodios</th>
+            </tr>
+            {% for anime in animes_por_formato %}
+                <tr>
+                    <td>{{ anime.name }}</td>
+                    <td>{{ anime.genre }}</td>
+                    <td>{{ anime.type }}</td>
+                    <td>{{ anime.total_episodes }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock %}
