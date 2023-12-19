@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        title: 'Confirmar carga de la base de datos',
+        html: `
+          <p>¿Estás seguro de que deseas cargar la base de datos? Esto borrará todos los datos existentes.</p>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="confirmar" class="swal2-confirm">Confirmar</button>
+            <a href="{% url 'home' %}" class="swal2-cancel">Cancelar</a>
+          </form>
+        `,
+        icon: 'warning',
+        showCancelButton: false,
+        showConfirmButton: false,
+        showCloseButton: true,
+        focusConfirm: false,
+        allowOutsideClick: false
+      });
+    });
+  </script>
+{% endblock %}
