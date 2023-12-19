@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import shelve
-from .recommendations import  transformPrefs, getRecommendations, topMatches, getRecommendedItems, sim_distance
+from .recommendations import  transformPrefs, getRecommendations, topMatches, getRecommendedItems, sim_distance, calculateSimilarItems
 
 def home(request):
 
@@ -39,22 +39,23 @@ def ingresar(request):
 
 
 
-def loadDict():
+def cargarRECSYS():
     Prefs={}  
-    shelf = shelve.open("dataRS")
-    # ratings = Puntuacion.objects.all()
-    ratings = []
+    shelf = shelve.open("dataRECSYS")
+    ratings = Puntuacion.objects.all()
     for ra in ratings:
-        user = ra.id_usuario.id_usuario
-        itemid = ra.id_pelicula.id_pelicula
-        rating = ra.puntuacion
+        user = ra.user_id
+        itemid = ra.anime.anime_id
+        rating = ra.rating
         Prefs.setdefault(user, {})
         Prefs[user][itemid] = rating
     shelf['Prefs']=Prefs
+    shelf['SimItems']=calculateSimilarItems(Prefs, n=10)
     shelf['ItemsPrefs']=transformPrefs(Prefs)
     shelf.close()
 
-def loadRS(request):
-    loadDict()
+def loadRECSYS(request):
+    cargarRECSYS()
     messages.success(request, 'Se ha cargado la matriz')
     return redirect('home')
+
