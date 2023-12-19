@@ -76,6 +76,9 @@ def recomendar_animes(request):
     tipos_de_emision = Anime.objects.values_list('type', flat=True).distinct()
     return render(request, 'recomendaciones.html', {'tipos_de_emision': tipos_de_emision})
 
+from django.shortcuts import render
+from .models import Anime
+
 def anime_por_genero(request):
     generos = Anime.objects.values_list('genre', flat=True).distinct()
     generos_separados = []
@@ -90,7 +93,9 @@ def anime_por_genero(request):
 
     if request.method == 'POST':
         selected_genre = request.POST.get('genero')
-        animes_por_formato = Anime.objects.filter(genre__contains=selected_genre).values('name', 'genre', 'type').annotate(total_episodes=Sum('episodes'))
-        return render(request, 'anime_por_genero.html', {'generos': generos, 'animes_por_formato': animes_por_formato, 'selected_genre': selected_genre})
+        animes_por_formato = Anime.objects.filter(genre__contains=selected_genre).order_by('type').values('name', 'genre', 'type').annotate(total_episodes=Sum('episodes'))
+        total= animes_por_formato.count()
+        return render(request, 'anime_por_genero.html', {'generos': generos, 'animes_por_formato': animes_por_formato, 'selected_genre': selected_genre, 'total': total})
 
     return render(request, 'anime_por_genero.html', {'generos': generos})
+

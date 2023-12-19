@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container mt-4">
     <h1>Seleccione un género</h1>
     <form method="post">
         {% csrf_token %}
@@ -11,9 +12,9 @@
         </select>
         <input type="submit" value="Mostrar animes">
     </form>
-
+    <div class="container mt-4">
     {% if selected_genre %}
-        <h3>Animes del género {{ selected_genre }}</h3>
+        <h3>Animes del género {{ selected_genre }}: {{total}}</h3>
         <ul class="list-group">
             {% for anime in animes_por_formato %}
             <li class="list-group-item">
@@ -25,5 +26,7 @@
         {% endfor %}
         </ul>
     {% endif %}
+    </div>
+    </div>
 
 {% endblock %}
