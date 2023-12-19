@@ -85,14 +85,20 @@ def anime_por_genero(request):
         for s in splitted:
             if s not in generos_separados:
                 generos_separados.append(s)
-    
+
     generos = generos_separados
 
     if request.method == 'POST':
         selected_genre = request.POST.get('genero')
-        animes_por_formato = Anime.objects.filter(genre__contains=selected_genre).order_by('type').values('name', 'genre', 'type').annotate(total_episodes=Sum('episodes'))
-        total= animes_por_formato.count()
-        return render(request, 'anime_por_genero.html', {'generos': generos, 'animes_por_formato': animes_por_formato, 'selected_genre': selected_genre, 'total': total})
+        animes_por_formato = Anime.objects.filter(genre__contains=selected_genre).order_by('type').values('type').annotate(total_episodes=Sum('episodes'))
+        tipos_anime = []
+
+        for tipo in animes_por_formato:
+            animes_tipo_actual = Anime.objects.filter(genre__contains=selected_genre, type=tipo['type']).order_by('name').values('name', 'genre', 'type').annotate(total_episodes=Sum('episodes'))
+            tipos_anime.append({'tipo': tipo['type'], 'animes': animes_tipo_actual})
+
+        total = animes_por_formato.count()
+        return render(request, 'anime_por_genero.html', {'generos': generos, 'tipos_anime': tipos_anime, 'selected_genre': selected_genre, 'total': total})
 
     return render(request, 'anime_por_genero.html', {'generos': generos})
 

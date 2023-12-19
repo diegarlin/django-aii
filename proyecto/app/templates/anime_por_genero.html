@@ -14,19 +14,21 @@
     </form>
     <div class="container mt-4">
     {% if selected_genre %}
-        <h3>Animes del género {{ selected_genre }}: {{total}}</h3>
-        <ul class="list-group">
-            {% for anime in animes_por_formato %}
-            <li class="list-group-item">
-                <strong>{{ anime.name }}</strong>
-                <p>Género: {{ anime.genre }}</p>
-                <p>Tipo: {{ anime.type }}</p>
-                <p>Episodios: {{ anime.total_episodes }}</p>
-            </li>
+        <h3>Animes del género {{ selected_genre }}: {{ total }}</h3>
+        {% for tipo_anime in tipos_anime %}
+            <h4>{{ tipo_anime.tipo }}</h4>
+            <ul class="list-group">
+                {% for anime in tipo_anime.animes %}
+                    <li class="list-group-item">
+                        <strong>{{ anime.name }}</strong>
+                        <p>Género: {{ anime.genre }}</p>
+                        <p>Tipo: {{ anime.type }}</p>
+                        <p>Episodios: {{ anime.total_episodes }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
         {% endfor %}
-        </ul>
     {% endif %}
     </div>
-    </div>
-
+</div>
 {% endblock %}
