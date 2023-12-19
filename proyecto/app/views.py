@@ -59,3 +59,30 @@ def loadRECSYS(request):
     messages.success(request, 'Se ha cargado la matriz')
     return redirect('home')
 
+def recomendar_animes(request):
+    if request.method == 'POST':
+        user_id = int(request.POST.get('user_id'))
+        formato_emision = request.POST.get('formato_emision')
+
+        shelf = shelve.open("dataRECSYS")
+        Prefs = shelf['Prefs']
+        shelf.close()
+        rankings = getRecommendations(Prefs, user_id)
+        
+        
+        animes = []       
+        puntuaciones = []
+
+        for re in rankings:
+            anime = Anime.objects.get(pk=re[1])
+            if anime.type == formato_emision:
+                animes.append(Anime.objects.get(pk=re[1]))
+                puntuaciones.append(re[0])
+
+
+        items = zip(animes[:2], puntuaciones[:2])
+        tipos_de_emision = Anime.objects.values_list('type', flat=True).distinct()
+        return render(request, 'recomendaciones.html', {'items': items, 'user_id': user_id, 'tipos_de_emision': tipos_de_emision})
+
+    tipos_de_emision = Anime.objects.values_list('type', flat=True).distinct()
+    return render(request, 'recomendaciones.html', {'tipos_de_emision': tipos_de_emision})
