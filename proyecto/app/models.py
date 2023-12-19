@@ -7,13 +7,13 @@ class Anime(models.Model):
     name = models.CharField(max_length=255)
     genre = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
-    episodes = models.IntegerField()
+    episodes = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
 
 class Puntuacion(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.IntegerField(default=0)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
 
