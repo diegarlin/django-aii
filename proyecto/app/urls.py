@@ -6,4 +6,5 @@ urlpatterns = [
     path("cargar", cargar, name='cargar'),
     path("info", info, name='info'),
     path("loadRECSYS", loadRECSYS, name='loadRECSYS'),
+    path("recomendar_animes", recomendar_animes, name='recomendar_animes'),
 ]

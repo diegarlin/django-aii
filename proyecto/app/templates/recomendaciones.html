@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Recomendaciones de Animes</h2>
+
+        <div class="container mt-4">
+            <h2>Recomendar Animes - Formulario</h2>
+    
+            <form method="post" action="{% url 'recomendar_animes' %}" class="mt-3">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="user_id">ID de Usuario:</label>
+                    <input type="number" class="form-control" id="user_id" name="user_id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="formato_emision">Formato de Emisión:</label>
+                    <select class="form-control" id="formato_emision" name="formato_emision" required>
+                        {% for tipo in tipos_de_emision %}
+                            <option value="{{ tipo }}">{{ tipo }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Obtener Recomendaciones</button>
+            </form>
+        </div>
+
+        {% if items %}
+            <h3 class="mt-3">Animes Recomendados:</h3>
+            <ul class="list-group">
+                {% for anime, score in items %}
+                    <li class="list-group-item">
+                        <strong>{{ anime.name }}</strong>
+                        <p>Formato de Emisión: {{ anime.type }}</p>
+                        <p>Puntuación Propuesta: {{ score }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mt-3">No hay animes recomendados en este momento.</p>
+        {% endif %}
+    </div>
+{% endblock %}
