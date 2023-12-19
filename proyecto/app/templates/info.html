@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        title: 'Información de la base de datos',
+        html: `
+          <p>Número de registros en la tabla Anime: {{ num_animes }}</p>
+          <p>Número de registros en la tabla Puntuacion: {{ num_puntuaciones }}</p>
+        `,
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+    });
+  </script>
+{% endblock %}

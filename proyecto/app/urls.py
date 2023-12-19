@@ -4,7 +4,8 @@ from .views import *
 urlpatterns = [
     path("", home, name='home'),
     path("cargar", cargar, name='cargar'),
-    path("ingresar", ingresar, name='ingresar'),
-    path("loadRS", loadRS, name='loadRS'),
+    path("info", info, name='info'),
+    path("loadRECSYS", loadRECSYS, name='loadRECSYS'),
+    path("recomendar_animes", recomendar_animes, name='recomendar_animes'),
     path('animes_por_genero', anime_por_genero, name='animes_por_genero'),
 ]
