@@ -76,9 +76,6 @@ def recomendar_animes(request):
     tipos_de_emision = Anime.objects.values_list('type', flat=True).distinct()
     return render(request, 'recomendaciones.html', {'tipos_de_emision': tipos_de_emision})
 
-from django.shortcuts import render
-from .models import Anime
-
 def anime_por_genero(request):
     generos = Anime.objects.values_list('genre', flat=True).distinct()
     generos_separados = []
