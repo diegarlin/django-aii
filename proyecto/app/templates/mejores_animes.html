@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Mejores Animes</h2>
+
+        {% for resultado in items %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ resultado.anime.name }}</h5>
+                    <p class="card-text">Puntuación Media: {{ resultado.anime.avg_rating }}</p>
+                    
+                    <h6 class="mt-3">Animes Similares:</h6>
+                    <ul class="list-group">
+                        {% for anime_similar in resultado.animes_similares %}
+                            <li class="list-group-item">{{ anime_similar.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -5,7 +5,8 @@ from django.contrib import messages
 from .cargar import cargar_datos
 from .models import Anime, Puntuacion
 import shelve
-from .recommendations import  transformPrefs, getRecommendations, calculateSimilarItems
+from .recommendations import  transformPrefs, getRecommendations, calculateSimilarItems, topMatches, sim_distance
+from django.db.models import Avg
 
 from .models import Anime
 from django.db.models import Sum
@@ -102,3 +103,18 @@ def anime_por_genero(request):
 
     return render(request, 'anime_por_genero.html', {'generos': generos})
 
+def mejores_animes(request):
+    mejores_animes = Anime.objects.annotate(avg_rating=Avg('puntuacion__rating')).order_by('-avg_rating')[:3]
+
+    resultados = mejores_animes[:3]
+
+    items = []
+    for anime in resultados:
+        shelf = shelve.open("dataRECSYS")
+        Prefs = shelf['ItemsPrefs']
+        shelf.close()
+        similares = topMatches(prefs=Prefs, person=anime.anime_id, n=2, similarity=sim_distance)
+        animes_similares = [Anime.objects.get(pk=re[1]) for re in similares]
+        items.append({'anime': anime, 'animes_similares': animes_similares})
+
+    return render(request, 'mejores_animes.html', {'items': items})
